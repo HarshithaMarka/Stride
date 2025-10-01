@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
-const App = () => {
+// Import the centralized theme configuration
+import { strideTheme } from './styles/strideTheme';
+import HeroPage from './features/pages/components/hero/HeroPage';
+
+function App() {
   return (
-    <div className='bg-red-600'>App</div>
-  )
+    // Wrap the app with ThemeProvider and CssBaseline for MUI styling
+    <ThemeProvider theme={strideTheme}>
+      <CssBaseline />
+      <HeroPage />
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
