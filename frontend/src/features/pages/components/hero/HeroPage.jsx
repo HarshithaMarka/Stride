@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import StriveButton from '../../../../components/button/StriveButton';
 import heroImage from '../../../../assets/images/hero.png'
 
@@ -30,7 +31,7 @@ const CheckCircleSVG = (props) => (
 
 
 // --- Feature Card Component (Helper) ---
-const FeatureCard = ({ icon: IconComponent, title, description, animationClass }) => (
+const FeatureCard = ({  title, description, animationClass }) => (
     <div 
         className={`group relative ${animationClass}`}
     >
@@ -140,6 +141,7 @@ const CallToActionSection = () => (
 
 // --- Main Hero Page Component ---
 const HeroPage = () => {
+    const navigate = useNavigate();
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50 to-white flex flex-col">
             {/* 1. Navigation Header */}
@@ -164,7 +166,7 @@ const HeroPage = () => {
                         <StriveButton 
                             variant="text" 
                             color="primary"
-                            onClick={() => console.log('Login clicked')}
+                            onClick={() => navigate('/login')}
                             className="text-indigo-600 hover:text-indigo-700 transition-all duration-300 ease-in-out
                                      hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             aria-label="Log in to your account"
