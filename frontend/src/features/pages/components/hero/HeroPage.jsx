@@ -31,7 +31,7 @@ const CheckCircleSVG = (props) => (
 
 
 // --- Feature Card Component (Helper) ---
-const FeatureCard = ({  title, description, animationClass }) => (
+const FeatureCard = ({ icon: Icon, title, description, animationClass }) => (
     <div 
         className={`group relative ${animationClass}`}
     >
@@ -44,7 +44,7 @@ const FeatureCard = ({  title, description, animationClass }) => (
             <PlaceholderIcon className="relative z-10 text-transparent bg-gradient-to-br from-indigo-600 to-purple-600 
                                       bg-clip-text text-4xl mb-6 transform transition-transform duration-500 
                                       group-hover:scale-110 group-hover:rotate-3">
-                <IconComponent className="w-12 h-12" />
+                <Icon className="w-12 h-12" />
             </PlaceholderIcon>
             <h3 className="text-2xl font-bold text-gray-800 mb-4 relative z-10">{title}</h3>
             <p className="text-gray-600 text-lg leading-relaxed relative z-10">{description}</p>
