@@ -16,54 +16,134 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50 to-white flex flex-col items-center justify-center">
-      <div
-        className="bg-white shadow-xl rounded-2xl p-8 sm:p-10 w-full max-w-md transition-transform duration-700"
-      >
-        <h2 className="text-3xl font-bold text-center mb-4 text-green-600">Create Account</h2>
-        <p className="text-gray-600 text-center mb-6">Sign up to start using Stride</p>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            name="name"
-            type="text"
-            placeholder="Name"
-            required
-            value={signUpData.name}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            required
-            value={signUpData.email}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            required
-            value={signUpData.password}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          <StriveButton type="submit" fullWidth color="success">Sign Up</StriveButton>
-        </form>
-
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <button
-            onClick={() => navigate('/login')}
-            className="text-green-600 font-medium hover:text-green-500"
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50 to-white flex flex-col">
+      {/* Header */}
+      <header className="w-full p-4 md:p-6 bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-20">
+        <nav className="flex justify-between items-center max-w-7xl mx-auto">
+          <a 
+            href="/" 
+            className="group text-2xl font-extrabold relative overflow-hidden"
+            aria-label="Stride Home"
           >
-            Sign in
-          </button>
-        </p>
-      </div>
+            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent 
+                         group-hover:animate-gradient-x">
+              S T R I D E
+            </span>
+            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 
+                         transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+          </a>
+        </nav>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full max-w-md">
+          {/* Background Effects */}
+          <div className="absolute -top-20 left-0 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob"></div>
+          <div className="absolute -bottom-20 right-0 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-4000"></div>
+          
+          {/* Sign Up Form Card */}
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl blur opacity-25 
+                        group-hover:opacity-75 transition duration-1000"></div>
+            <div className="relative bg-white shadow-xl rounded-2xl p-8 sm:p-10">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 
+                                 bg-clip-text text-transparent">
+                  Create Account
+                </h2>
+                <p className="mt-2 text-gray-600">Sign up to start using Stride</p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                    Full Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    value={signUpData.name}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm 
+                             focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    Email Address
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={signUpData.email}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm 
+                             focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                    placeholder="Enter your email"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    value={signUpData.password}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm 
+                             focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                    placeholder="Create a password"
+                  />
+                </div>
+
+                <div>
+                  <StriveButton
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    className="group relative w-full py-3 px-4 border border-transparent text-sm font-medium 
+                             rounded-xl text-white bg-gradient-to-r from-indigo-600 to-purple-600 
+                             hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 
+                             focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 
+                             transform hover:-translate-y-0.5"
+                  >
+                    Sign Up
+                  </StriveButton>
+                </div>
+              </form>
+
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-600">
+                  Already have an account?{' '}
+                  <button
+                    onClick={() => navigate('/login')}
+                    className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200"
+                  >
+                    Sign in
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="py-4 text-center text-gray-500 text-sm">
+        <p>&copy; {new Date().getFullYear()} Stride. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
