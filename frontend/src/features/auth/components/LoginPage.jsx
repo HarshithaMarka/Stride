@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StriveButton from '../../../components/button/StriveButton';
+import Header from '../../../components/Header/Header';
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -24,23 +25,7 @@ const LoginPage = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50 to-white flex flex-col">
-            {/* Header */}
-            <header className="w-full p-4 md:p-6 bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-20">
-                <nav className="flex justify-between items-center max-w-7xl mx-auto">
-                    <a 
-                        href="/" 
-                        className="group text-2xl font-extrabold relative overflow-hidden"
-                        aria-label="Stride Home"
-                    >
-                        <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent 
-                                     group-hover:animate-gradient-x">
-                            S T R I D E
-                        </span>
-                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 
-                                     transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </a>
-                </nav>
-            </header>
+            <Header />
 
             {/* Main Content */}
             <main className="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8">
