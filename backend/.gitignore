@@ -51,3 +51,5 @@ Thumbs.db
 
 # Debugging
 node_inspect/
+# Ignore sensitive environment variables
+.env
