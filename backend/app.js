@@ -2,7 +2,7 @@ const express = require("express");
 const requestLogger = require('./src/middlewares/requestLogger');
 const errorHandler = require('./src/middlewares/errorHandler');
 const notFoundHandler = require('./src/middlewares/notFoundHandler');
-const testRoutes = require('./src/routes/test');
+
 const userRoutes = require('./src/routes/userRoutes');
 
 const app = express();
@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(requestLogger);
 
 // Routes
-app.use('/api', testRoutes);
 app.use('/api/users', userRoutes);
 
 // Error handling
