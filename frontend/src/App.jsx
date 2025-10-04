@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { strideTheme } from './styles/strideTheme';
 import HeroPage from './features/pages/components/hero/HeroPage';
 import LoginPage from './features/auth/components/LoginPage';
+import SignUpPage from './features/auth/components/SignUpPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HeroPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path='/signup' element={<SignUpPage />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

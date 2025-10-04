@@ -132,7 +132,7 @@ const CallToActionSection = () => (
           variant="contained"
           color="secondary"
           size="large"
-          onClick={() => console.log("Final CTA clicked")}
+          onClick={() => navigate('/signup')}
           className="group relative py-6 px-12 text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 
                              hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl transform transition-all 
                              duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl"
@@ -205,7 +205,7 @@ const HeroPage = () => {
             <StriveButton
               variant="contained"
               color="primary"
-              onClick={() => console.log("Sign Up clicked")}
+              onClick={() => navigate('/signup')}
               className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 
                                      text-white shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform 
                                      hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -246,7 +246,7 @@ const HeroPage = () => {
                     variant="contained"
                     color="primary"
                     size="large"
-                    onClick={() => console.log("Get Started clicked")}
+                    onClick={() => navigate('/signup')}
                     className="group relative py-4 px-8 text-lg bg-gradient-to-r from-indigo-600 to-purple-600 
                                                  hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl 
                                                  transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 rounded-xl
