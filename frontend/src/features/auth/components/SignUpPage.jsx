@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StriveButton from '../../../components/button/StriveButton';
+import OTPVerify from "./OTPVerify";
 import Header from '../../../components/Header/Header';
+import Footer from '../../../components/Footer/Footer';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [signUpData, setSignUpData] = useState({ name: '', email: '', password: '' });
+  const [showOtpScreen, setShowOtpScreen] = useState(false); // state to show OTP
 
   const handleChange = (e) => {
     setSignUpData({ ...signUpData, [e.target.name]: e.target.value });
@@ -14,11 +17,25 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Sign-Up submitted:', signUpData);
+
+    // Show OTP input screen
+    setShowOtpScreen(true);
   };
+
+  const handleOTPVerified = () => {
+    setShowOtpScreen(false);
+    alert('Registration Successful!');
+    navigate('/login'); // redirect to login after OTP verification
+  };
+
+  // Show OTP verification screen if user clicked Sign Up
+  if (showOtpScreen) {
+    return <OTPVerify onVerify={handleOTPVerified} />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50 to-white flex flex-col">
-      <Header />
+<Header />
 
       {/* Main Content */}
       <main className="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -126,9 +143,7 @@ const SignUpPage = () => {
       </main>
 
       {/* Footer */}
-      <footer className="py-4 text-center text-gray-500 text-sm">
-        <p>&copy; {new Date().getFullYear()} Stride. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
