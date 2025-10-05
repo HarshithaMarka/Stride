@@ -1,6 +1,6 @@
-const User = require("../models/User");   // assuming you already have this
+const User = require("../models/user");   // fixing case sensitivity
 const Otp = require('../models/Otp');
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const sendEmail = require("../utils/sendEmail"); // we'll create this
 const jwt = require("jsonwebtoken");
 
