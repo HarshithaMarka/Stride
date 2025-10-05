@@ -18,8 +18,6 @@ import LoginPage from './features/auth/components/LoginPage';
 
 import SignUpPage from './features/auth/components/SignUpPage';
 
-
-
 function App() {
 
   return (
@@ -39,7 +37,6 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
 
           <Route path='/signup' element={<SignUpPage />} />
-
         </Routes>
 
       </ThemeProvider>
