@@ -8,6 +8,7 @@ import { strideTheme } from './styles/strideTheme';
 import HeroPage from './features/pages/components/hero/HeroPage';
 import LoginPage from './features/auth/components/LoginPage';
 import SignUpPage from './features/auth/components/SignUpPage';
+import Dashboard from './features/pages/components/dashboard/Dashboard';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<HeroPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path='/signup' element={<SignUpPage />} />
+          <Route path="/dashboard" element={<Dashboard/>} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

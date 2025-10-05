@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StriveButton from '../../../components/button/StriveButton';
 import Header from '../../../components/Header/Header';
+import Footer from '../../../components/Footer/Footer';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -126,9 +127,7 @@ const SignUpPage = () => {
       </main>
 
       {/* Footer */}
-      <footer className="py-4 text-center text-gray-500 text-sm">
-        <p>&copy; {new Date().getFullYear()} Stride. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
