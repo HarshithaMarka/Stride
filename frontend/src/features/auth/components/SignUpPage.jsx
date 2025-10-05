@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StriveButton from '../../../components/button/StriveButton';
 import OTPVerify from "./OTPVerify";
+import Header from '../../../components/Header/Header';
+
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [signUpData, setSignUpData] = useState({ name: '', email: '', password: '' });
@@ -32,7 +34,7 @@ const SignUpPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50 to-white flex flex-col">
-    
+<Header />
 
       {/* Main Content */}
       <main className="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8">
