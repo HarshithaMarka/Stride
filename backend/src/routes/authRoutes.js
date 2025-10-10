@@ -3,7 +3,6 @@ const { loginUser, registerUser, verifyOTP } = require('../controllers/authContr
 const router = express.Router();
 
 router.post('/login', loginUser);
-
 router.post('/register', registerUser);
 
 router.post('/verify-otp', verifyOTP);

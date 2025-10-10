@@ -20,8 +20,6 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Password is required'],
         minlength: [6, 'Password must be at least 6 characters long']
     },
-
-    // 1. USER ROLES (Feature UTM-04)
     role: {
         type: String,
         // The two required roles for the MVP
@@ -29,7 +27,6 @@ const userSchema = new mongoose.Schema({
         default: 'Team Member',
     },
 
-    // 2. OTP / VERIFICATION FIELDS
     isVerified: {
         type: Boolean,
         default: false, 
