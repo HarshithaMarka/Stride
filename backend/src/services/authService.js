@@ -16,6 +16,8 @@ class AuthService {
             { expiresIn: process.env.JWT_EXPIRES_IN }
         );
     }
+    // inside the AuthService class { ... }
+
 // Helper function to generate OTP
 generateOTP() {
     return otpGenerator.generate(6, { 
@@ -29,27 +31,31 @@ generateOTP() {
 // 1. Handles user creation, OTP generation, and email sending
 async registerUser(userData) {
     try {
+        // Check if user already exists
         let user = await User.findOne({ email: userData.email });
         
         if (user && user.isVerified) {
              throw new AppError('User already exists and verified. Please log in.', 409);
         }
         
+        // If unverified user exists, update their OTP; otherwise, create new user
         if (user && !user.isVerified) {
+            // Unverified user: we proceed to update their details
             
         } else {
-        
+            // New user creation
             user = new User(userData);
-            
+            // Default role is set in the Mongoose schema, so no need to set here
         }
         
         // Generate and set OTP fields
         const otp = this.generateOTP();
-        const otpExpires = Date.now() + 5 * 60 * 1000; 
+        const otpExpires = Date.now() + 5 * 60 * 1000; // 5 minutes expiration
         
         user.otp = otp;
         user.otpExpires = otpExpires;
-        user.isVerified = false; 
+        user.isVerified = false; // Ensure they are unverified until code is submitted
+        
         await user.save();
         
         // Send OTP email using the service function

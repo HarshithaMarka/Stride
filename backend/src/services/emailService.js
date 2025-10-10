@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 // 1. Configure the Transporter (Connects to the email server)
 const transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    service: 'Gmail', // Replace with your service (e.g., SendGrid, Outlook, etc.)
     auth: {
         user: process.env.EMAIL_USER, 
         pass: process.env.EMAIL_PASS, 
@@ -17,8 +17,8 @@ const sendVerificationEmail = async (email, otp) => {
             from: process.env.EMAIL_USER, // Sender address
             to: email, // Recipient address
             subject: 'AgileFlow: Your One-Time Verification Code',
-           
-            text: ` Your verification code is ${otp}. 
+            // Using a simple text message for the OTP
+            text: `Thank you for registering with AgileFlow! Your verification code is ${otp}. 
                    This code is valid for 5 minutes.`,
         };
 
