@@ -1,34 +1,73 @@
-const userService = require('../services/userService');
-const { validateRegisterUser } = require('../validators/userValidator');
-const { AppError } = require('../utils/errors');
+const User = require("../models/user");   // fixing case sensitivity
+const Otp = require('../models/Otp');
+const bcrypt = require("bcryptjs");
+const sendEmail = require("../utils/sendEmail"); // we'll create this
+const jwt = require("jsonwebtoken");
 
-const registerUser = async (req, res, next) => {
+// REGISTER USER (Step 1: Send OTP)
+exports.registerUser = async (req, res) => {
   try {
-    // Validate request data
-    const validatedData = await validateRegisterUser(req.body);
-    
-    // Create user using service
-    const user = await userService.createUser(validatedData);
+    const { email, password } = req.body;
 
-    res.status(201).json({
-      status: 'success',
-      data: {
-        user
-      }
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json({ msg: "User already exists" });
+
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Save OTP with expiry (5 mins)
+    await Otp.create({
+      email,
+      otp,
+      expiresAt: Date.now() + 5 * 60 * 1000
     });
-  } catch (error) {
-    // Pass validation errors as is
-    if (error.status === 400 && error.errors) {
-      return res.status(400).json({
-        status: 'error',
-        message: error.message,
-        errors: error.errors
-      });
-    }
-    next(error);
+
+    // Send OTP email
+    await sendEmail(email, "Verify your account", `Your OTP is ${otp}`);
+
+    // Don’t create user yet, wait until OTP verified
+    res.json({ msg: "OTP sent to your email. Please verify to complete registration." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
   }
 };
 
-module.exports = {
-  registerUser
+// VERIFY OTP (Step 2: Create User after OTP check)
+exports.verifyOtp = async (req, res) => {
+  try {
+    const { email, password, otp } = req.body;
+
+    // Find OTP in DB
+    const validOtp = await Otp.findOne({ email, otp });
+    if (!validOtp) return res.status(400).json({ msg: "Invalid OTP" });
+
+    if (validOtp.expiresAt < Date.now()) {
+      await Otp.deleteOne({ _id: validOtp._id });
+      return res.status(400).json({ msg: "OTP expired" });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create user
+    const user = new User({
+      email,
+      password: hashedPassword,
+      isVerified: true
+    });
+    await user.save();
+
+    // Delete OTP after use
+    await Otp.deleteOne({ _id: validOtp._id });
+
+    // (Optional) Issue JWT token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+    res.json({ msg: "Account created successfully!", token });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
+  }
 };
