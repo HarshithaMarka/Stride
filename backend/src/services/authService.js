@@ -1,11 +1,9 @@
 const otpGenerator = require('otp-generator');
 const sendVerificationEmail = require('../services/emailService');
-
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const { AppError } = require('../utils/errors');
 const logger = require('../config/logger');
-
 class AuthService {
     generateToken(user) {
         return jwt.sign(
@@ -64,7 +62,6 @@ async registerUser(userData) {
         throw error;
     }
 }
-
 // 2. Handles OTP verification and finalizes the account
 async verifyOTP(email, otp) {
     try {
@@ -113,7 +110,6 @@ async verifyOTP(email, otp) {
         throw error;
     }
 }
-
     async loginUser(email, password) {
         try {
             // Find user by email
@@ -150,6 +146,32 @@ async verifyOTP(email, otp) {
             throw error;
         }
     }
-}
+async resendOTP(email) {
+    try {
+        const user = await User.findOne({ email });
 
+        if (!user) {
+            throw new AppError('User not found.', 404);
+        }
+        if (user.isVerified) {
+            throw new AppError('Account is already verified. Please log in.', 400);
+        }
+
+        // Generate and set NEW OTP fields
+        const otp = this.generateOTP(); 
+        const otpExpires = Date.now() + 5 * 60 * 1000; 
+
+        user.otp = otp;
+        user.otpExpires = otpExpires;
+        await user.save();
+        await sendVerificationEmail(user.email, otp);
+
+        return 'A new verification code has been sent to your email.';
+
+    } catch (error) {
+        logger.error('Resend OTP service error:', error);
+        throw error;
+    }
+}
+}
 module.exports = new AuthService();

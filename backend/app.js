@@ -1,13 +1,12 @@
 const express = require("express");
+const cors=require('cors');
 const requestLogger = require('./src/middlewares/requestLogger');
 const errorHandler = require('./src/middlewares/errorHandler');
 const notFoundHandler = require('./src/middlewares/notFoundHandler');
-
 const userRoutes = require('./src/routes/userRoutes');
 const authRoutes = require('./src/routes/authRoutes');
-
 const app = express();
-
+app.use(cors());
 // Built-in middleware
 app.use(express.json());
 
