@@ -46,6 +46,12 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
+// Track last login and last logout times to support token invalidation on logout
+userSchema.add({
+  lastLogin: { type: Date },
+  lastLogout: { type: Date }
+});
+
 // Hash password before saving
 userSchema.pre('save', async function(next) {
     if (!this.isModified('password')) return next();
